@@ -1,0 +1,87 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200" 
+        x:Class="Profile_Database_Editor.ASINKkey"
+        WindowStartupLocation="CenterScreen"
+        Title="" Background="#1e2124" MinWidth="300" MinHeight="200" MaxHeight="200" MaxWidth="550">
+     <Window.Styles>
+               
+                <Style Selector="TextBox.Entered">
+                      
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Margin" Value="5,9,5,9"/>
+                        <Setter Property="CornerRadius" Value="11" />
+                        
+                </Style>
+                
+                
+                <Style Selector="Button" >
+                        <Setter Property="CornerRadius" Value="6" />
+                        <Setter Property="Margin" Value="2,0,2,0"/>
+                       
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+                <Style Selector="Button.control" >
+                        <Setter Property="CornerRadius" Value="6" />
+                        <Setter Property="Margin" Value="4,8,4,8"/>
+                       
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+               
+                
+        </Window.Styles>
+        <Grid>
+                
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>  
+                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                       Content="Сonfiguring  keys" 
+                       HorizontalContentAlignment="Center"
+                       ></Label>
+                
+                <TextBox Grid.Row="1" Grid.Column="0" Watermark="pub" Name="pubBox" Classes="Entered" ></TextBox>
+                <Button Grid.Row="1" Grid.Column="1"
+                        Content="Path" Classes="control" Name="pubButton"
+                        Click="PubButton_OnClick"
+                        ></Button>
+                
+                
+                <TextBox Grid.Row="1" Grid.Column="2" Watermark="priv" Name="privBox" Classes="Entered" ></TextBox>
+                <Button Grid.Row="1" Grid.Column="3" 
+                        Content="Path" Classes="control" Name="privButton"
+                        Click="PrivButton_OnClick"
+                        ></Button>
+                
+                
+                <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                        Classes="control" Content="Make" Name="MakeButton" 
+                        Click="MakeButton_OnClick"></Button>
+                
+                <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
+                        Classes="control" Content="Save" Name="SaveButton" 
+                        Click="SaveButton_OnClick"></Button>
+        </Grid>
+        
+    
+   
+        
+</Window>
