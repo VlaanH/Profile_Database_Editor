@@ -14,7 +14,7 @@ namespace Profile_Database_Editor.Settings
             
         public bool UseEncryption { get; set; }
         
-        public string Table { get; set; }
+        public Database.EModels Table { get; set; }
         
       
     }

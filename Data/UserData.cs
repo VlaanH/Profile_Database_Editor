@@ -11,5 +11,6 @@ namespace Profile_Database_Editor.Data
         public string Password { get; set; } 
 
         public bool IsCorrectData = true;
+        
     }
 }
