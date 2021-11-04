@@ -19,7 +19,8 @@ namespace Profile_Database_Editor.Database
     
     
     public class AppDbContext :  DbContext
-    {
+    {   
+        //for easy creation of migrations
         public string _databasePath = "Profile_database.db";
         
         
@@ -29,8 +30,6 @@ namespace Profile_Database_Editor.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-          
             
             optionsBuilder.UseSqlite($"Data Source={_databasePath}");
         }
