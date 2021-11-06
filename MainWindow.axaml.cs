@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
@@ -73,7 +72,7 @@ namespace Profile_Database_Editor
             settings.DatabasePath = this.Find<TextBox>("TextBoxDbPath").Text;
             try
             {
-                settings.Table = this.Find<ComboBox>("ComboBoxDatabaseTables").SelectedItem!.ToString();
+                settings.Table = (EModels) this.Find<ComboBox>("ComboBoxDatabaseTables").SelectedIndex;
             }
             catch (Exception e)
             {
@@ -139,11 +138,10 @@ namespace Profile_Database_Editor
                 if (allTables.Count < 1)
                     error = true;
              
-              
             
             
                 this.Find<ComboBox>("ComboBoxDatabaseTables").Items = allTables;
-                databaseManagement.DbConnector.Close();
+                
                 if (init==true|IsComboBoxEmpty()==true)
                     this.Find<ComboBox>("ComboBoxDatabaseTables").SelectedIndex = 0;
 
@@ -164,6 +162,8 @@ namespace Profile_Database_Editor
 
         async void Update()
         {
+            bool error = false;
+            
             var encryptionAlgorithm = GetSelectedEncryptionAlgorithm();
             var settingsKey = await SettingsManagement.GetKey();
             
@@ -206,7 +206,7 @@ namespace Profile_Database_Editor
                 }
                 catch (Exception e)
                 {
-                    MessageDialog.ShowMessage("Error in decrypting data");
+                    error = true;
                 }
 
 
@@ -216,9 +216,15 @@ namespace Profile_Database_Editor
             {
                 settings.EncryptionKey = settingsKey.PubKeyPath;
             }
-            
-            InterfaceDatabaseRecord.DatabaseOutput(listAllRecordsDb,databaseManagement,settings.UseEncryption,settings.Table,encryptionAlgorithm,settings.EncryptionKey);
 
+            if (error==false)
+                InterfaceDatabaseRecord.DatabaseOutput(listAllRecordsDb,databaseManagement,settings.UseEncryption,settings.Table,encryptionAlgorithm,settings.EncryptionKey);
+            else
+            {
+                MessageDialog.ShowMessage("Error");
+            }
+            
+            
             
 
         }
@@ -358,59 +364,13 @@ namespace Profile_Database_Editor
 
         private async void ButtonCreateTable_OnClick(object? sender, RoutedEventArgs e)
         {
-            
-           string nameTable = await MessageDialog.DataInput();
-           string dbPath = GetDatabasePath();
-           if (nameTable!=default)
-           {
-               try
-               {
-                   DatabaseManagement databaseManagement = new DatabaseManagement(dbPath);
-                   databaseManagement.CreateTable(nameTable);
-                   databaseManagement.DbConnector.Close();
-               }
-               catch (Exception exception)
-               {
-                   MessageDialog.ShowMessage("failed to create table");
-               }
-               
-               
-           }
-           else
-           {
-               MessageDialog.ShowMessage("failed to create table");
-           }
-
-           AddTables(dbPath);
-
-
+          
 
         }
 
         private void ButtonDeleteTable_OnClick(object? sender, RoutedEventArgs e)
         {
-            string nameTable = GetSettings().Table;
-            string dbPath = GetDatabasePath();
-            if (nameTable!="")
-            {
-                try
-                {
-                    DatabaseManagement databaseManagement = new DatabaseManagement(dbPath);
-                    databaseManagement.DeleteTable(nameTable);
-                    databaseManagement.DbConnector.Close();
-                }
-                catch (Exception exception)
-                {
-                    MessageDialog.ShowMessage("failed to Delete table");
-                }
-               
-               
-            }
-            else
-            {
-                MessageDialog.ShowMessage("Unselected table");
-            }
-            AddTables(dbPath);
+            
         }
 
         private void ComboBoxenEryptionAlgorithm_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)

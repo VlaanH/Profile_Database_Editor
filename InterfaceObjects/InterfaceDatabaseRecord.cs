@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using Avalonia.Controls;
 using Profile_Database_Editor.Cryptography;
 using Profile_Database_Editor.Data;
@@ -13,7 +12,7 @@ namespace Profile_Database_Editor.InterfaceObjects
     {
         
         public static StackPanel MainStackPanel = new StackPanel();
-        public static Grid GetRecordGrid(UserData userData,DatabaseManagement databaseManagement,bool useEncryption,string encryptionKey,string table,CryptoObj.EeryptAlgorithm algorithm)
+        public static Grid GetRecordGrid(UserData userData,DatabaseManagement databaseManagement,bool useEncryption,string encryptionKey,Database.EModels table,CryptoObj.EeryptAlgorithm algorithm)
         {
             Grid record = new Grid();
             
@@ -157,7 +156,7 @@ namespace Profile_Database_Editor.InterfaceObjects
             return record;
         }
 
-        public static void DatabaseOutput(List<UserData> listUserData,DatabaseManagement databaseManagement,bool useEncryption,string table,CryptoObj.EeryptAlgorithm encryptionAlgorithm,string encryptionKey = default)
+        public static void DatabaseOutput(List<UserData> listUserData,DatabaseManagement databaseManagement,bool useEncryption,Database.EModels table,CryptoObj.EeryptAlgorithm encryptionAlgorithm,string encryptionKey = default)
         {
             MainStackPanel.Children.Clear();
             for (int i = 0; i < listUserData.Count; i++)
