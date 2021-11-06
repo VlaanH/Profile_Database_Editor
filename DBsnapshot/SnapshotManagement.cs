@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Profile_Database_Editor.DbSnapshot
 {
@@ -35,7 +37,16 @@ namespace Profile_Database_Editor.DbSnapshot
             
       
         }
-        
+
+        public List<string> GetAllSnapshot(string dbPath)
+        {
+            string dbSnapshotPath = GetSnapshotDirectory(dbPath);
+            var allSnap= Directory.GetFiles(dbSnapshotPath);
+            
+            return allSnap.ToList();
+        }
+
+
 
     }
 }
