@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -14,15 +9,16 @@ using Avalonia.Media;
 using Profile_Database_Editor.Cryptography;
 using Profile_Database_Editor.Data;
 using Profile_Database_Editor.Database;
+using Profile_Database_Editor.DbSnapshot;
 using Profile_Database_Editor.InterfaceObjects;
 using Profile_Database_Editor.Message;
 using Profile_Database_Editor.Settings;
-using Profile_Database_Editor.Cryptography;
 
 namespace Profile_Database_Editor
 {
-    public partial class MainWindow : Window,INotifyPropertyChanged
+    public class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -307,22 +303,25 @@ namespace Profile_Database_Editor
 
         private async void Button_OnClick(object? sender, RoutedEventArgs e)
         {
+            
             bool error = false;
            
             error = AddTables(GetDatabasePath());
             
+            
+            
+            
             if (error==true)
                 MessageDialog.ShowMessage("No tables found or DB");
             else
-            { 
-                
+            {
                 error = await Add();
                 if (error==true)
                 {
                     MessageDialog.ShowMessage("Failed to add record to database");
                 }
-                
             }
+            
         }
 
 
@@ -333,6 +332,8 @@ namespace Profile_Database_Editor
             bool error = false;
            
             error = AddTables(GetDatabasePath());
+            
+            
             
             if (error==true)
                 Message.MessageDialog.ShowMessage("No tables found or DB");
@@ -362,14 +363,14 @@ namespace Profile_Database_Editor
             }
         }
 
-        private async void ButtonCreateTable_OnClick(object? sender, RoutedEventArgs e)
+        private void ButtonCreateTable_OnClick(object? sender, RoutedEventArgs e)
         {
-          
-
+            Snapshot.Show(this);
         }
 
         private void ButtonDeleteTable_OnClick(object? sender, RoutedEventArgs e)
         {
+           
             
         }
 

@@ -26,6 +26,23 @@ namespace Profile_Database_Editor.Message
             
         }
 
+        public static async Task<ButtonResult> YesNo(string message)
+        {
+            var msBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+                .GetMessageBoxStandardWindow(new MessageBoxStandardParams{
+                    ButtonDefinitions = ButtonEnum.YesNo,
+                    ContentMessage = message,
+                    Icon = Icon.Stopwatch,
+                    Style = Style.UbuntuLinux,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                    
+                });
+            return await msBoxStandardWindow.Show();
+
+        }
+        
+        
+        
         public static async Task<string> DataInput()
         {
             var messageBoxInputWindow = MessageBox.Avalonia.MessageBoxManager

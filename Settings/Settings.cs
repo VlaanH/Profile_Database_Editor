@@ -85,14 +85,21 @@ namespace Profile_Database_Editor.Settings
         }
         public static async void Save(SettingsData settingsClass)
         {
-            
-            using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
-            { 
-                //cleaning
-                fs.SetLength(default);
+            if (File.Exists(settingsClass.DatabasePath))
+            {
+                if (new FileInfo(settingsClass.DatabasePath).Length>0)
+                {
+                    using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                    { 
+                        //cleaning
+                        fs.SetLength(default);
                 
-                await JsonSerializer.SerializeAsync<SettingsData>(fs, settingsClass);
+                        await JsonSerializer.SerializeAsync<SettingsData>(fs, settingsClass);
+                    }
+                }
+               
             }
+            
         }
         
         public static async Task<SettingsDataKeys> GetKey()

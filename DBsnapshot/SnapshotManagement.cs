@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Profile_Database_Editor.DbSnapshot
 {
-    public class SnapshotManagement
+    public static class SnapshotManagement
     {
-        private string GetSnapshotDirectory(string filePath)
+        private static string GetSnapshotDirectory(string filePath)
         {
             return new FileInfo(filePath).Name+"_Snap";
         }
 
-        public void CreateSnapshot(string dbPath)
+        public static void CreateSnapshot(string dbPath)
         {
             string dateNow = DateTime.Now.ToString();
 
@@ -27,18 +27,21 @@ namespace Profile_Database_Editor.DbSnapshot
 
         }
 
-        public void UseSnapshot(string dbPath,string snapshotName)
+        public static void DeleteSnapshot(string snapshotPath)
         {
-            string dbSnapshotPath = GetSnapshotDirectory(dbPath)+"/"+snapshotName;
+            File.Delete(snapshotPath);
+        }
+
+        public static void UseSnapshot(string dbPath,string snapshotPath)
+        {
             
-   
             
-            File.Copy(dbSnapshotPath,dbPath,true);
+            File.Copy(snapshotPath,dbPath,true);
             
       
         }
 
-        public List<string> GetAllSnapshot(string dbPath)
+        public static List<string> GetAllSnapshot(string dbPath)
         {
             string dbSnapshotPath = GetSnapshotDirectory(dbPath);
             var allSnap= Directory.GetFiles(dbSnapshotPath);
