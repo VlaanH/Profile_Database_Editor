@@ -43,7 +43,7 @@ namespace Profile_Database_Editor.Message
         
         
         
-        public static async Task<string> DataInput()
+        public static async Task<string> DataInput(string message,string title)
         {
             var messageBoxInputWindow = MessageBox.Avalonia.MessageBoxManager
                 .GetMessageBoxInputWindow(new MessageBoxInputParams
@@ -51,8 +51,8 @@ namespace Profile_Database_Editor.Message
                     Style = Style.UbuntuLinux,
                     Topmost = true,
                     ShowInCenter = true,
-                    ContentMessage = "Table name",
-                    ContentTitle = "Enter table name",
+                    ContentMessage = message,
+                    ContentTitle = title,
                  
                     ButtonDefinitions = new[]
                     {

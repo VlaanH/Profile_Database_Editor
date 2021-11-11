@@ -12,7 +12,7 @@ namespace Profile_Database_Editor.DbSnapshot
             return new FileInfo(filePath).Name+"_Snap";
         }
 
-        public static void CreateSnapshot(string dbPath)
+        public static void CreateSnapshot(string dbPath,string snapshotName)
         {
             string dateNow = DateTime.Now.ToString();
 
@@ -23,7 +23,7 @@ namespace Profile_Database_Editor.DbSnapshot
                 Directory.CreateDirectory(dbSnapshotDirectory);
            
             
-            File.Copy(dbPath,dbSnapshotDirectory+"/"+dateNow);
+            File.Copy(dbPath,dbSnapshotDirectory+"/"+dateNow+" | "+snapshotName);
 
         }
 

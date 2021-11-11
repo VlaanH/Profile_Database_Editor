@@ -71,9 +71,14 @@ namespace Profile_Database_Editor
 
         private async void CreateSnapButton_OnClick(object? sender, RoutedEventArgs e)
         {
-            var dbPath=(await Settings.SettingsManagement.Get()).DatabasePath;
-            SnapshotManagement.CreateSnapshot(dbPath);
-            WriteAllSnaps();
+            var snapName= await MessageDialog.DataInput("Snap Name", "Create Snapshot");
+            if (snapName!=default)
+            {
+                var dbPath=(await Settings.SettingsManagement.Get()).DatabasePath;
+                SnapshotManagement.CreateSnapshot(dbPath,snapName);
+                WriteAllSnaps();
+            }
+           
         }
 
         private async void UseSnapshot_OnClick(object? sender, RoutedEventArgs e)
